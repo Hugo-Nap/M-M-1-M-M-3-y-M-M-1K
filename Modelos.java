@@ -16,7 +16,7 @@ public class Modelos {
             System.out.println("|= = = = = = = = = = = = = = = |");
             System.out.println("|Selecione el modelo a utilizar|");
             System.out.println("|1........................M/M/1|");
-            System.out.println("|2........................M/M/3|");
+            System.out.println("|2........................M/M/C|");
             System.out.println("|3.......................M/M/1K|");
             System.out.println("|4........................Salir|");
             System.out.println("|= = = = = = = = = = = = = = = |");
@@ -49,9 +49,11 @@ public class Modelos {
                     System.out.println("Tiempo total en el sistema: " + W + " Horas" + " ó " + W * 60 + " Minutos");
                 }
                 case 2 -> {
-                    // Modelo M/M/3
+                    // Modelo M/M/C
+                    //actualize de mm3 a mmc
                     //creacion de constante c
-                    double c = 3;
+                    System.out.println("Incerte el valor de c");
+                    double c = reader.nextDouble();
                     System.out.println("Ingrese el valor de Lambda: ");
                     lambda = reader.nextInt();
                     System.out.println("Ingrese el valor de mu: ");
@@ -59,9 +61,11 @@ public class Modelos {
 
                     //paso 1: Constante a
                     double a = lambda / mu;
+                    System.out.println("Constante a : " + a);
 
                     //paso 2: Utilizacion del servidor
                     double p = a / c;
+                    System.out.println("Utilizacion del servidor p = " + p);
 
                     //paso 3: Probablidad de que no haya nadie en el sistema
                     // paso 1 para p0 sumatoria
@@ -75,23 +79,33 @@ public class Modelos {
                     double sumaTotal = sumatoria + terminoEspera;
                     // paso 4 para p0
                     double pCero = 1 / sumaTotal;
+                    System.out.println("Probabilidad de que no haya nadie en el sistema p0: " + pCero);
 
                     // paso 4 Probabilidad de que un cliente tenga que esperar
-                    double Pespera = (Math.pow(a, c)) / (factorial((int) c) * (1 - p));
+                    double Pespera = (Math.pow(a, c)) / (factorial((int) c) * (1 - p)) * (pCero);
+                    System.out.println("Probablidad de que un cliente tenga que esperar P espera: " + Pespera);
 
                     // paso 5 Longitud promedio en cola
                     double Lq = (Pespera * p) / 1 - p;
+                    System.out.println("Longitud promedio en cola: " + Lq);
 
                     //paso 6 Tiempo promedio de espera en la cola
                     double Wq = Lq / lambda;
+                    System.out.println("Tiempo promedio de espera en la cola: " + Wq);
 
                     //paso 7 Tiempo total en el sistema 
                     double W = Wq + 1/mu;
+                    System.out.println("Tiempo total en el sistema: " + W);
 
                     //paso 8 Numero promedio en el sistema
                     double L = lambda * W;
+                    System.out.println("Numero Promedio en el sistema: " + L);
 
                     //nota mañana ya muestro los resultados, ya tengo sueño :(
+                }
+                case 3 -> { 
+                    //Metodo M/M/1K
+                    //lo hago depue
                 }
             }
         }while(option != 4);
