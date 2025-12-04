@@ -106,6 +106,36 @@ public class Modelos {
                 case 3 -> { 
                     //Metodo M/M/1K
                     //lo hago depue
+                    System.out.println("Ingrese el valor de Lambda: ");
+                    lambda = reader.nextInt();
+                    System.out.println("Ingrese el valor de mu: ");
+                    mu = reader.nextInt();
+                    System.out.println("Incerte el valor de k");
+                    int k = reader.nextInt();
+
+                    //paso 1: utilizacion del sistema
+                    double p = lambda / mu ;
+                    System.out.println("Utilizacion del sistema: " +  p);
+
+                    //paso 2: Probabilidad de que haya 0 personas 
+                    double pCero = (1 - p) / (1 - (Math.pow(p,k + 1)));
+                    System.out.println("Probabilidad de que haya 0 personas: " + pCero);
+
+                    //paso 3: Probabilidad de rechazo k
+                    double pK = Math.pow(p, k) * pCero;
+                    System.out.println("Probablidad de rechazo: " + pK);
+                    
+                    //paso 4: Taza efectiva de llegada lambdaE
+                    double lambdaE = lambda * (1 - pK);
+                    System.out.println("Taza efectiva de llegada: " + lambdaE);
+
+                    //paso 5: longitud de cola
+                    double L = p * (1 - (k + 1) * Math.pow(p, k) + k * Math.pow(p, k +1 ))/((1 - p) * (1 - (Math.pow(p, k + 1))));
+                    System.out.println("Longitud de cola: " + L);
+
+                    //paso 6: tiempo en el sistema
+                    double w = L/lambdaE;
+                    System.out.println("tiempo del sistema " + w + " hrs");
                 }
             }
         }while(option != 4);
