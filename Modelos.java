@@ -74,11 +74,11 @@ public class Modelos {
                         sumatoria = sumatoria + (Math.pow(a, n) / factorial(n));
                     }
                     // paso 2 para p0
-                    double terminoEspera = (Math.pow(a, c)) / (factorial((int) c));
+                    double terminoEspera = (Math.pow(a, c)) / (factorial((int) c)) * (1 / (1 - p));
                     // paso 3 para p0
                     double sumaTotal = sumatoria + terminoEspera;
                     // paso 4 para p0
-                    double pCero = 1 / sumaTotal;
+                    double pCero = Math.pow(sumaTotal,-1);
                     System.out.println("Probabilidad de que no haya nadie en el sistema p0: " + pCero);
 
                     // paso 4 Probabilidad de que un cliente tenga que esperar
@@ -86,7 +86,7 @@ public class Modelos {
                     System.out.println("Probablidad de que un cliente tenga que esperar P espera: " + Pespera);
 
                     // paso 5 Longitud promedio en cola
-                    double Lq = (Pespera * p) / 1 - p;
+                    double Lq = (Pespera * p) / (1 - p);
                     System.out.println("Longitud promedio en cola: " + Lq);
 
                     //paso 6 Tiempo promedio de espera en la cola
